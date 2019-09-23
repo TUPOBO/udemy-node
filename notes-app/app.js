@@ -12,4 +12,4 @@ console.log(notesContent());
  */
 const chalk = require('chalk');
 
-console.log(chalk.bold.bgGreen('Success'));
+console.log(chalk.bold.blue.underline('Success'));
