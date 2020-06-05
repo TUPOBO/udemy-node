@@ -1,10 +1,11 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 const getNotes = function () {
   return 'Your notes ...';
 };
 
-// 更新 note
+// 添加 note
 const addNote = function (title, body) {
   const notes = loadNotes();
   const duplicateNotes = notes.filter((item) => item.title === title);
@@ -15,9 +16,25 @@ const addNote = function (title, body) {
       body,
     });
     saveNote(notes);
-    console.log('New note added!');
+    console.log(chalk.green.inverse('New note added!'));
   } else {
-    console.log('Note title taken!');
+    console.log(chalk.red.inverse('Note title taken!'));
+  }
+};
+
+/**
+ * 删除 note
+ * @param {string} title -- note title
+ */
+const removeNote = function (title) {
+  const notes = loadNotes();
+  const notesToKeep = notes.filter((item) => item.title !== title);
+
+  if (notes.length > notesToKeep.length) {
+    console.log(chalk.green.inverse('Note removed!'));
+    saveNote(notesToKeep);
+  } else {
+    console.log(chalk.red.inverse('No note found!'));
   }
 };
 
@@ -39,4 +56,4 @@ const saveNote = function (notes) {
   fs.writeFileSync('notes.json', dataJSON);
 };
 
-module.exports = { getNotes, addNote };
+module.exports = { getNotes, addNote, removeNote };
