@@ -35,6 +35,17 @@ const removeNote = (title) => {
   }
 };
 
+/**
+ * 展示所有notes内容
+ */
+const listNotes = () => {
+  const notes = loadNotes();
+  console.log(chalk.inverse('Your notes...'));
+  notes.forEach((note) => {
+    console.log(chalk.green(note.title));
+  });
+};
+
 // 读取原有 notes 内容
 const loadNotes = () => {
   try {
@@ -53,4 +64,4 @@ const saveNote = (notes) => {
   fs.writeFileSync('notes.json', dataJSON);
 };
 
-module.exports = { getNotes, addNote, removeNote };
+module.exports = { getNotes, addNote, removeNote, listNotes };
