@@ -1,12 +1,9 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = function () {
-  return 'Your notes ...';
-};
-
+const getNotes = () => 'Your notes ...';
 // 添加 note
-const addNote = function (title, body) {
+const addNote = (title, body) => {
   const notes = loadNotes();
   const duplicateNotes = notes.filter((item) => item.title === title);
 
@@ -26,7 +23,7 @@ const addNote = function (title, body) {
  * 删除 note
  * @param {string} title -- note title
  */
-const removeNote = function (title) {
+const removeNote = (title) => {
   const notes = loadNotes();
   const notesToKeep = notes.filter((item) => item.title !== title);
 
@@ -39,7 +36,7 @@ const removeNote = function (title) {
 };
 
 // 读取原有 notes 内容
-const loadNotes = function () {
+const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync('notes.json');
     const dataJSON = dataBuffer.toString();
@@ -51,7 +48,7 @@ const loadNotes = function () {
 };
 
 // 保存最新 notes 内容
-const saveNote = function (notes) {
+const saveNote = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync('notes.json', dataJSON);
 };
